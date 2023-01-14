@@ -1,0 +1,12 @@
+[package]
+name = "parser"
+version = "0.0.1"
+authors = ["Ain Tohvri <ain@flashbit.net>"]
+edition = "2021"
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_json = { version = "1.0" }
+exitfailure = { version = "0.5.1" }
+reqwest = { version = "0.11.0", features = ["json"] }
+tokio = { version = "1.0.2", features = ["full"] }
