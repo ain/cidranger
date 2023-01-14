@@ -4,7 +4,7 @@ Command-line utility to match an IP address against classless inter-domain routi
 
 ## Running
 
-    $ cargo run
+    cargo run
 
 ## Licence
 
