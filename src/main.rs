@@ -1,6 +1,3 @@
-use std::net::Ipv4Addr;
-use std::net::Ipv6Addr;
-use iprange::IpRange;
 use parser::parse_ips;
 use ipnet::IpNet;
 
