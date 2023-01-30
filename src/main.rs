@@ -1,12 +1,8 @@
-extern crate iprange;
-
 use std::net::Ipv4Addr;
 use std::net::Ipv6Addr;
 use iprange::IpRange;
-//use ipnet::Ipv4Net;
 use parser::parse_ips;
-use parser::IpCollection;
-
+use ipnet::IpNet;
 
 fn main() {
 
@@ -17,12 +13,7 @@ fn main() {
         //.next()
         //.expect("one argument required");
 
-    let google_ip_ranges: IpCollection = parse_ips(googlebot_ip_range_url).unwrap();
-    //parse_ips(googlebot_ip_range_url);
+    let google_ip_ranges: Vec<IpNet> = parse_ips(googlebot_ip_range_url).unwrap();
 
-    println!("IPs ranges parsed: {:?}", google_ip_ranges.creationTime);
-
-    //match arg.to_str() {
-       //Some(arg) =>
-    //}
+    println!("Processing concluded with {} IP networks parsed!", google_ip_ranges.len());
 }

@@ -9,3 +9,4 @@ edition = "2021"
 validator = { version = "0.12", features = ["derive"] }
 iprange = { version = "0.6" }
 parser = { path = "parser" }
+ipnet = { version = "2", features = ["serde"] }

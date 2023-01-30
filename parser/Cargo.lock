@@ -353,6 +353,9 @@ name = "ipnet"
 version = "2.5.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f88c5561171189e69df9d98bcf18fd5f9558300f7ea7b801eb8a0fd748bd8745"
+dependencies = [
+ "serde",
+]
 
 [[package]]
 name = "itoa"
@@ -549,6 +552,7 @@ name = "parser"
 version = "0.0.1"
 dependencies = [
  "exitfailure",
+ "ipnet",
  "reqwest",
  "serde",
  "serde_json",

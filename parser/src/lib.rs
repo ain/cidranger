@@ -1,33 +1,33 @@
-//use serde_json::Value;
 use serde::Deserialize;
-//use serde_json::Result;
 use reqwest::Client;
 use tokio::runtime::Runtime;
-//use exitfailure::ExitFailure;
-//use std::env;
-//use std::net::Ipv4Addr;
-//use std::net::Ipv6Addr;
-//use std::fmt;
 use std::collections::HashMap;
-use std::net::SocketAddr;
-
-
-//impl parse_ips()<GooglebotIpRange, reqwest::Error> {
-//#[derive(Deserialize, Debug)]
-//struct Prefix {
-   //ipv6Prefix: String
-//}
+use ipnet::IpNet;
+use serde_json::from_str;
 
 #[derive(Deserialize, Debug)]
 pub struct IpCollection {
     pub creationTime: String,
-    //prefixes: Vec<Prefix>
-    prefixes: Vec<HashMap<String, String>>
+    pub prefixes: Vec<HashMap<String, String>>
 }
 
-pub fn parse_ips(url: &str) -> Option<IpCollection> {
+impl IpCollection {
+    fn create<S: Into<String>>(creationTime: S, prefixes: Vec<HashMap<String, String>>) -> Self where Self: Sized {
+        IpCollection{ creationTime: creationTime.into(), prefixes: prefixes }
+    }
 
-    println!("fetching {}", url);
+    fn creationTime(&self) -> &String {
+        &self.creationTime
+    }
+
+    fn prefixes(&self) -> &Vec<HashMap<String, String>> {
+        &self.prefixes
+    }
+}
+
+pub fn parse_ips(url: &str) -> Option<Vec<IpNet>> {
+
+    println!("Fetching {}...", url);
 
     let client = Client::new();
     let rt = Runtime::new().unwrap();
@@ -37,19 +37,21 @@ pub fn parse_ips(url: &str) -> Option<IpCollection> {
     });
 
     match response {
-        Ok(json) => Some(json),
+        Ok(json) => {
+            let mut ranges : Vec<IpNet> = Vec::new();
+            for prefix in json.prefixes {
+                let range : IpNet = match (prefix.get("ipv4Prefix"), prefix.get("ipv6Prefix")) {
+                    (Some(ipv4), _) => ipv4.to_string().parse().unwrap(),
+                    (_, Some(ipv6)) => ipv6.to_string().parse().unwrap(),
+                    _ => continue,
+                };
+                ranges.push(range);
+            }
+            Some(ranges)
+        },
         Err(e) => {
             println!("An error occurred: {:?}", e);
             None
         }
     }
-
-    //#[derive(Deserialize)]
-    //struct GooglebotIpRange {
-        //kind: String,
-        //prefixes: Vec<IpCollection>
-    //}
-
-
-    //return serde_json::from_str(&json_str).unwrap();
 }

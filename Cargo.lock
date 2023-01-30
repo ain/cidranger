@@ -87,6 +87,7 @@ checksum = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
 name = "cidranger"
 version = "0.1.0"
 dependencies = [
+ "ipnet",
  "iprange",
  "parser",
  "validator",
@@ -388,6 +389,9 @@ name = "ipnet"
 version = "2.5.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f88c5561171189e69df9d98bcf18fd5f9558300f7ea7b801eb8a0fd748bd8745"
+dependencies = [
+ "serde",
+]
 
 [[package]]
 name = "iprange"
@@ -599,6 +603,7 @@ name = "parser"
 version = "0.0.1"
 dependencies = [
  "exitfailure",
+ "ipnet",
  "reqwest",
  "serde",
  "serde_json",
