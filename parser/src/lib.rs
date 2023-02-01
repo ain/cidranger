@@ -3,26 +3,11 @@ use reqwest::Client;
 use tokio::runtime::Runtime;
 use std::collections::HashMap;
 use ipnet::IpNet;
-use serde_json::from_str;
 
 #[derive(Deserialize, Debug)]
-pub struct IpCollection {
-    pub creationTime: String,
-    pub prefixes: Vec<HashMap<String, String>>
-}
-
-impl IpCollection {
-    fn create<S: Into<String>>(creationTime: S, prefixes: Vec<HashMap<String, String>>) -> Self where Self: Sized {
-        IpCollection{ creationTime: creationTime.into(), prefixes: prefixes }
-    }
-
-    fn creationTime(&self) -> &String {
-        &self.creationTime
-    }
-
-    fn prefixes(&self) -> &Vec<HashMap<String, String>> {
-        &self.prefixes
-    }
+struct IpCollection {
+    creationTime: String,
+    prefixes: Vec<HashMap<String, String>>
 }
 
 pub fn parse_ips(url: &str) -> Option<Vec<IpNet>> {
