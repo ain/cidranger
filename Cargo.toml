@@ -1,7 +1,10 @@
 [package]
 name = "cidranger"
+description = "Command-line utility to match an IP address against CIDR map"
 version = "0.1.0"
 edition = "2021"
+authors = ["Ain Tohvri <ain@flashbit.net>"]
+license = "GPL-3"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -10,3 +13,4 @@ validator = { version = "0.16", features = ["derive"] }
 iprange = { version = "0.6" }
 parser = { path = "parser" }
 ipnet = { version = "2", features = ["serde"] }
+clap = { version = "4.1", features = ["derive"] }
