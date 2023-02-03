@@ -4,13 +4,14 @@ use parser::parse_ips;
 use ipnet::IpNet;
 use clap::Parser;
 use std::net::IpAddr;
+use url::Url;
 
 #[derive(Parser)]
 #[command(version)]
 struct Cli {
     #[arg(short, long, value_parser = clap::value_parser!(IpAddr))]
     ip: String,
-    #[arg(short,long)]
+    #[arg(short,long, value_parser = clap::value_parser!(Url))]
     ranges_url: String,
     #[arg(short,long)]
     filter_key: Option<String>

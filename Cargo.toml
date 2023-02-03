@@ -14,3 +14,4 @@ iprange = { version = "0.6" }
 parser = { path = "parser" }
 ipnet = { version = "2", features = ["serde"] }
 clap = { version = "4.1", features = ["derive"] }
+url = { version = "2", features = ["serde"] }

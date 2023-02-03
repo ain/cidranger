@@ -91,6 +91,7 @@ dependencies = [
  "ipnet",
  "iprange",
  "parser",
+ "url",
  "validator",
 ]
 
@@ -1188,6 +1189,7 @@ dependencies = [
  "form_urlencoded",
  "idna 0.3.0",
  "percent-encoding",
+ "serde",
 ]
 
 [[package]]
