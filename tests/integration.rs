@@ -25,7 +25,7 @@ mod integration {
     fn cli_missing_ranges() {
         let mut cmd = Command::cargo_bin("cidranger").unwrap();
         let assert = cmd.arg("--ip=127.0.0.1").assert();
-        assert.failure();
+        assert.failure().stderr(predicate::str::contains("error: the following required arguments were not provided:\n  --ranges-url <RANGES_URL>\n\nUsage: cidranger --ip <IP> --ranges-url <RANGES_URL>\n\nFor more information, try '--help'."));
     }
 
 }
