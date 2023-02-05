@@ -6,7 +6,9 @@ edition = "2021"
 authors = ["Ain Tohvri <ain@flashbit.net>"]
 license = "GPL-3"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[dev-dependencies]
+assert_cmd = "2.0.8"
+predicates = "2.1.5"
 
 [dependencies]
 validator = { version = "0.16", features = ["derive"] }
