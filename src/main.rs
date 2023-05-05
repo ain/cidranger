@@ -10,9 +10,9 @@ use url::Url;
 #[command(version)]
 struct Cli {
     #[arg(short, long, value_parser = clap::value_parser!(IpAddr))]
-    ip: String,
+    ip: IpAddr,
     #[arg(short,long, value_parser = clap::value_parser!(Url))]
-    ranges_url: String,
+    ranges_url: Url,
     #[arg(short,long)]
     filter_key: Option<String>
 }
