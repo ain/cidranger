@@ -21,9 +21,7 @@ fn main() {
 
     let cli = Cli::parse();
 
-    let googlebot_ip_range_url: &'static str = "https://developers.google.com/static/search/apis/ipranges/googlebot.json";
+    let ip_ranges: Vec<IpNet> = parse_ips(cli.ranges_url).unwrap();
 
-    let google_ip_ranges: Vec<IpNet> = parse_ips(googlebot_ip_range_url).unwrap();
-
-    println!("Processing concluded with {} IP networks parsed!", google_ip_ranges.len());
+    println!("Processing concluded with {} IP networks parsed!", ip_ranges.len());
 }

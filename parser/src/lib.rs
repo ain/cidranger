@@ -3,6 +3,7 @@ use reqwest::Client;
 use tokio::runtime::Runtime;
 use std::collections::HashMap;
 use ipnet::IpNet;
+use url::Url;
 
 #[derive(Deserialize, Debug)]
 struct IpCollection {
@@ -10,7 +11,7 @@ struct IpCollection {
     prefixes: Vec<HashMap<String, String>>
 }
 
-pub fn parse_ips(url: &str) -> Option<Vec<IpNet>> {
+pub fn parse_ips(url: Url) -> Option<Vec<IpNet>> {
 
     println!("Fetching {}...", url);
 
