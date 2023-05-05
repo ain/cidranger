@@ -6,6 +6,10 @@ Command-line utility to match an IP address against classless inter-domain routi
 
     cargo run
 
+For example:
+
+    cargo run -- --ip=127.0.0.1 --ranges-url=https://developers.google.com/static/search/apis/ipranges/googlebot.json
+
 ## Test suite
 
 To run the test suite, e.g. when developing a feature:
