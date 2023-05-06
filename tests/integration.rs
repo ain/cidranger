@@ -28,4 +28,17 @@ mod integration {
         assert.failure().stderr(predicate::str::contains("error: the following required arguments were not provided:\n  --ranges-url <RANGES_URL>\n\nUsage: cidranger --ip <IP> --ranges-url <RANGES_URL>\n\nFor more information, try '--help'."));
     }
 
+    #[test]
+    fn no_ip_match() {
+        let mut cmd = Command::cargo_bin("cidranger").unwrap();
+        let assert = cmd.args(&["--ip=127.0.0.1", "--ranges-url=https://raw.githubusercontent.com/ain/cidranger/main/tests/data/sample.json"]).assert();
+        assert.failure().stderr(predicate::str::contains("127.0.0.1 not found in any of the ranges!"));
+    }
+
+    #[test]
+    fn ip_match() {
+        let mut cmd = Command::cargo_bin("cidranger").unwrap();
+        let assert = cmd.args(&["--ip=34.146.150.144", "--ranges-url=https://raw.githubusercontent.com/ain/cidranger/main/tests/data/sample.json"]).assert();
+        assert.success().stdout(predicate::str::contains("34.146.150.144 was matched!"));
+    }
 }

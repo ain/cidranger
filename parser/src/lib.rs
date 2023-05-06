@@ -27,8 +27,8 @@ pub fn parse_ips(url: Url) -> Option<Vec<IpNet>> {
             let mut ranges : Vec<IpNet> = Vec::new();
             for prefix in json.prefixes {
                 let range : IpNet = match (prefix.get("ipv4Prefix"), prefix.get("ipv6Prefix")) {
-                    (Some(ipv4), _) => ipv4.to_string().parse().unwrap(),
-                    (_, Some(ipv6)) => ipv6.to_string().parse().unwrap(),
+                    (Some(ipv4), _) => IpNet::V4(ipv4.to_string().parse().unwrap()),
+                    (_, Some(ipv6)) => IpNet::V6(ipv6.to_string().parse().unwrap()),
                     _ => continue,
                 };
                 ranges.push(range);

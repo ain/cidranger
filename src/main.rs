@@ -17,11 +17,26 @@ struct Cli {
     filter_key: Option<String>
 }
 
-fn main() {
+fn main() -> Result<(), String> {
 
     let cli = Cli::parse();
 
     let ip_ranges: Vec<IpNet> = parse_ips(cli.ranges_url).unwrap();
 
-    println!("Processing concluded with {} IP networks parsed!", ip_ranges.len());
+    let mut ip_match = false;
+
+    for ip_range in ip_ranges {
+        if ip_range.contains(&cli.ip) {
+            println!("{} is a match for {}!", cli.ip, ip_range);
+            ip_match = true;
+        }
+    }
+
+    if ip_match {
+        println!("{} was matched!", cli.ip);
+        Ok(())
+    } else {
+        let error_message = format!("{} not found in any of the ranges!", cli.ip);
+        return Err(error_message)
+    }
 }
