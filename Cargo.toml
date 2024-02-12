@@ -15,5 +15,5 @@ validator = { version = "0.16", features = ["derive"] }
 iprange = { version = "0.6" }
 parser = { path = "parser" }
 ipnet = { version = "2", features = ["serde"] }
-clap = { version = "4.4", features = ["derive"] }
+clap = { version = "4.5", features = ["derive"] }
 url = { version = "2", features = ["serde"] }
