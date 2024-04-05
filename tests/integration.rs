@@ -29,16 +29,30 @@ mod integration {
     }
 
     #[test]
-    fn no_ip_match() {
+    fn no_ipv4_match() {
         let mut cmd = Command::cargo_bin("cidranger").unwrap();
         let assert = cmd.args(&["--ip=127.0.0.1", "--ranges-url=https://raw.githubusercontent.com/ain/cidranger/main/tests/data/sample.json"]).assert();
         assert.failure().stderr(predicate::str::contains("127.0.0.1 not found in any of the ranges!"));
     }
 
     #[test]
-    fn ip_match() {
+    fn ipv4_match() {
         let mut cmd = Command::cargo_bin("cidranger").unwrap();
         let assert = cmd.args(&["--ip=34.146.150.144", "--ranges-url=https://raw.githubusercontent.com/ain/cidranger/main/tests/data/sample.json"]).assert();
         assert.success().stdout(predicate::str::contains("34.146.150.144 was matched!"));
+    }
+
+    #[test]
+    fn ipv6_match() {
+        let mut cmd = Command::cargo_bin("cidranger").unwrap();
+        let assert = cmd.args(&["--ip=2001:4860:4801:10:0:a00:0:1", "--ranges-url=https://raw.githubusercontent.com/ain/cidranger/main/tests/data/sample.json"]).assert();
+        assert.success().stdout(predicate::str::contains("2001:4860:4801:10:0:a00:0:1 was matched!"));
+    }
+
+    #[test]
+    fn no_ipv6_match() {
+        let mut cmd = Command::cargo_bin("cidranger").unwrap();
+        let assert = cmd.args(&["--ip=2a01:4860:4801:10:0:a00:0:1", "--ranges-url=https://raw.githubusercontent.com/ain/cidranger/main/tests/data/sample.json"]).assert();
+        assert.failure().stderr(predicate::str::contains("2a01:4860:4801:10:0:a00:0:1 not found in any of the ranges!"));
     }
 }
