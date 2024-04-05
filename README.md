@@ -25,4 +25,4 @@ To run the test suite, e.g. when developing a feature:
 
 ## Licence
 
-Copyright © 2023 Ain Tohvri. Licenced under [GPL-3](https://github.com/ain/botranger/blob/main/LICENSE).
+Licenced under [GPL-3](https://github.com/ain/botranger/blob/main/LICENSE).
